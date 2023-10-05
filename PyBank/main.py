@@ -1,15 +1,15 @@
 # main.py
 
-# Script for PyBank analysis using Python - Module 03 - Data Analytics Bootcamp
+# Script for PyBank analysis using Python - Module 03 - MSU Data Analytics Bootcamp
 # Result returned is a summary analysis of MOM changes in P&L over 7+ yearly period.
-# Created: 			2023-09-27
-# Last Modified:	2023-10-04
+# Created: 2023-09-27
+# Last Modified: 2023-10-05
 # Author: Adrian Santos
 # v1.0
 
 # Notes: 	Worked with fellow student, Michael Moore. His approach is very different from mine, and mine is what makes sense to me.
 #			Had tutoring assistance from Reza Abasaltian to get past the roadblocks in the approach that I have taken in this analysis.
-
+#			I used Bing to ask for help on how to export the results to a text file.
 ###############################################################
 
 # Import Python module to create file paths across operating systems
@@ -22,7 +22,8 @@ os.system('clear')
 import csv
 
 # Define file_name
-file_name = "budget_data.csv"
+# The 
+file_name = "/Users/adrian/Documents/GitHub/python-challenge/PyBank/Resources/budget_data.csv"
 
 month = [] # First column of data in CSV file is Month in 'Mmm-YY' format
 MOM_delta = [] # container for month-on-month changes in P&L
@@ -74,8 +75,21 @@ print("Greatest Increase in Profits: ", month[index_month_max], "\t", formatted_
 print("Greatest Decrease in Losses: ", month[index_month_min], "\t", formatted_min_MOM_delta)			# First part returns the associated month - Second part returns the formatted min MOM_detail
 print()				# Insert a final blank line for readability
 
-
 # NOTE: Only negative numbers have parentheses around them; positive numbers never have parentheses around them--it would misconstrue the value as negative.
 # The script provides clearer labels and proper number/currency formatting. A 'negative profit' is not a profit; it is called a loss.
 
+
+#############################
+# Begin Output to Text File #
+#############################
+
+with open('budget_data_output.txt', 'w') as f:
+    f.write('Financial Analysis\n')
+    f.write('----------------------------\n')
+    f.write('Total Months: ' + str(len(MOM_delta) + 1) + '\n')
+    f.write('Total P&L: ' + str(formatted_total_pnl) + '\n')
+    f.write('Average Month-on-Month Change: ' + str(formatted_average_pnl) + '\n')
+    f.write('Greatest Increase in Profits: ' + str(month[index_month_max]) + '\t' + str(formatted_max_MOM_delta) + '\n')
+    f.write('Greatest Decrease in Losses: ' + str(month[index_month_min]) + '\t' + str(formatted_min_MOM_delta))
+	
 # End of Script
